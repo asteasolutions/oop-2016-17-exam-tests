@@ -19,8 +19,8 @@ TEST_CASE("Interval", Interval_ClassKeepsAssignedData)
 TEST_CASE("Interval", Interval_InvalidIntervalShouldDefaultToZeroOne)
 {
   Interval i(10, 5);
-  Assert::AreEqual(d.GetLeft(), 0);
-  Assert::AreEqual(d.GetRight(), 1);
+  Assert::AreEqual(i.GetLeft(), 0);
+  Assert::AreEqual(i.GetRight(), 1);
 }
 
 TEST_CASE("Interval", Interval_ContainsNumber)
@@ -44,38 +44,16 @@ TEST_CASE("Interval", Interval_ComparisonsWork)
   Interval i2(1, 3);
   Interval i3(2, 4);
   Interval i4(4, 4);
-  
+
   Assert::AreComparisonOperatorsStrict(i1);
   Assert::AreComparisonOperatorsStrict(i2);
   Assert::AreComparisonOperatorsStrict(i3);
   Assert::AreComparisonOperatorsStrict(i4);
 
-  Assert::AreComparisonOperatorsStrictForDifferingElements(i1, i2);
-  Assert::AreComparisonOperatorsStrictForDifferingElements(i1, i3);
-  Assert::AreComparisonOperatorsStrictForDifferingElements(i1, i4);
-  Assert::AreComparisonOperatorsStrictForDifferingElements(i2, i3);
-  Assert::AreComparisonOperatorsStrictForDifferingElements(i2, i4);
-  Assert::AreComparisonOperatorsStrictForDifferingElements(i3, i4);
-
-  Assert::IsTrue(i1 > i2);
-  Assert::IsTrue(i1 > i3);
-  Assert::IsTrue(i1 > i4);
-  Assert::IsTrue(i3 > i4);
-
-  Assert::IsTrue(i1 >= i2);
-  Assert::IsTrue(i1 >= i3);
-  Assert::IsTrue(i1 >= i4);
-  Assert::IsTrue(i3 >= i4);
-
-  Assert::IsTrue(i2 < i1);
-  Assert::IsTrue(i3 < i1);
-  Assert::IsTrue(i4 < i1);
-  Assert::IsTrue(i4 < i3);
-
-  Assert::IsTrue(i2 <= i1);
-  Assert::IsTrue(i3 <= i1);
-  Assert::IsTrue(i4 <= i1);
-  Assert::IsTrue(i4 <= i3);
+  Assert::AreComparisonOperatorsStrictForDifferingElements(i2, i1);
+  Assert::AreComparisonOperatorsStrictForDifferingElements(i3, i1);
+  Assert::AreComparisonOperatorsStrictForDifferingElements(i4, i1);
+  Assert::AreComparisonOperatorsStrictForDifferingElements(i4, i3);
 
   Assert::IsFalse(i2 < i3);
   Assert::IsFalse(i2 > i3);
@@ -104,14 +82,14 @@ TEST_CASE("IntervalSet", IntervalSet_ClassKeepsAssignedData)
   
   Assert::AreEqual(is.GetSize(), 3);
   
-  Assert::AreEqual(is.GetInterval()[0].GetLeft(), 1);
-  Assert::AreEqual(is.GetInterval()[0].GetRight(), 3);
+  Assert::AreEqual(is.GetIntervals()[0].GetLeft(), 1);
+  Assert::AreEqual(is.GetIntervals()[0].GetRight(), 3);
 
-  Assert::AreEqual(is.GetInterval()[1].GetLeft(), 2);
-  Assert::AreEqual(is.GetInterval()[1].GetRight(), 4);
+  Assert::AreEqual(is.GetIntervals()[1].GetLeft(), 2);
+  Assert::AreEqual(is.GetIntervals()[1].GetRight(), 4);
 
-  Assert::AreEqual(is.GetInterval()[2].GetLeft(), 3);
-  Assert::AreEqual(is.GetInterval()[2].GetRight(), 5);
+  Assert::AreEqual(is.GetIntervals()[2].GetLeft(), 3);
+  Assert::AreEqual(is.GetIntervals()[2].GetRight(), 5);
 }
 
 TEST_CASE("IntervalSet", IntervalSet_RegularConstrucorCopiesArray)
@@ -126,13 +104,10 @@ TEST_CASE("IntervalSet", IntervalSet_RegularConstrucorCopiesArray)
                       reinterpret_cast<intptr_t>(Intervals)
                       );
 
-  iarr[1] = Interval(6, 8);
+  Intervals[1] = Interval(6, 8);
 
-  Assert::AreEqual(is.GetIntervals()[1].GetLeft(), 6);
-  Assert::AreEqual(is.GetIntervals()[1].GetRight(), 8);
-
-  Assert::AreNotEqual(Intervals[1].GetLeft(), 6);
-  Assert::AreNotEqual(Intervals[1].GetRight(), 8);
+  Assert::AreNotEqual(is.GetIntervals()[1].GetLeft(), 6);
+  Assert::AreNotEqual(is.GetIntervals()[1].GetRight(), 8);
 }
 
 TEST_CASE("IntervalSet", IntervalSet_CopyConstrucorCopiesArray)
@@ -150,14 +125,14 @@ TEST_CASE("IntervalSet", IntervalSet_CopyConstrucorCopiesArray)
 
   delete is1;
 
-  Assert::AreEqual(is2.GetInterval()[0].GetLeft(), 1);
-  Assert::AreEqual(is2.GetInterval()[0].GetRight(), 3);
+  Assert::AreEqual(is2.GetIntervals()[0].GetLeft(), 1);
+  Assert::AreEqual(is2.GetIntervals()[0].GetRight(), 3);
 
-  Assert::AreEqual(is2.GetInterval()[1].GetLeft(), 2);
-  Assert::AreEqual(is2.GetInterval()[1].GetRight(), 4);
+  Assert::AreEqual(is2.GetIntervals()[1].GetLeft(), 2);
+  Assert::AreEqual(is2.GetIntervals()[1].GetRight(), 4);
 
-  Assert::AreEqual(is2.GetInterval()[2].GetLeft(), 3);
-  Assert::AreEqual(is2.GetInterval()[2].GetRight(), 5);
+  Assert::AreEqual(is2.GetIntervals()[2].GetLeft(), 3);
+  Assert::AreEqual(is2.GetIntervals()[2].GetRight(), 5);
 }
 
 TEST_CASE("IntervalSet", IntervalSet_AssignmentOperatorCopiesArray)
@@ -176,29 +151,16 @@ TEST_CASE("IntervalSet", IntervalSet_AssignmentOperatorCopiesArray)
 
   delete is1;
 
-  Assert::AreEqual(is2.GetInterval()[0].GetLeft(), 1);
-  Assert::AreEqual(is2.GetInterval()[0].GetRight(), 3);
+  Assert::AreEqual(is2.GetIntervals()[0].GetLeft(), 1);
+  Assert::AreEqual(is2.GetIntervals()[0].GetRight(), 3);
 
-  Assert::AreEqual(is2.GetInterval()[1].GetLeft(), 2);
-  Assert::AreEqual(is2.GetInterval()[1].GetRight(), 4);
+  Assert::AreEqual(is2.GetIntervals()[1].GetLeft(), 2);
+  Assert::AreEqual(is2.GetIntervals()[1].GetRight(), 4);
 
-  Assert::AreEqual(is2.GetInterval()[2].GetLeft(), 3);
-  Assert::AreEqual(is2.GetInterval()[2].GetRight(), 5);
+  Assert::AreEqual(is2.GetIntervals()[2].GetLeft(), 3);
+  Assert::AreEqual(is2.GetIntervals()[2].GetRight(), 5);
 }
 
-TEST_CASE("IntervalSet", IntervalSet_AllContainWorks)
-{
-  Interval Intervals[] = { Interval(1, 3), Interval(2, 4), Interval(3, 5) };
-  IntervalSet is(Intervals, 3);
-
-  Assert::IsFalse(is.AllContains(0));
-  Assert::IsFalse(is.AllContains(1));
-  Assert::IsTrue (is.AllContains(2));
-  Assert::IsTrue (is.AllContains(3));
-  Assert::IsFalse(is.AllContains(4));
-  Assert::IsFalse(is.AllContains(5));
-  Assert::IsFalse(is.AllContains(6));
-}
 
 TEST_CASE("IntervalSet", IntervalSet_CountSubsetsWorks)
 {
