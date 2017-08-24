@@ -13,9 +13,9 @@ TEST_CASE("Temperature", Temperature_DefaultTemperatureIs12)
 TEST_CASE("Temperature", Temperature_ClassKeepsAssignedData)
 {
   Temperature t(7, 20, 28);
-  Assert::AreEqual(i.GetMin(), 7);
-  Assert::AreEqual(i.GetAverage(), 20);
-  Assert::AreEqual(i.GetMax(), 28);
+  Assert::AreEqual(t.GetMin(), 7);
+  Assert::AreEqual(t.GetAverage(), 20);
+  Assert::AreEqual(t.GetMax(), 28);
 }
 
 TEST_CASE("Temperature", Temperature_InvalidValuesShouldDefaultTo12)
@@ -26,7 +26,7 @@ TEST_CASE("Temperature", Temperature_InvalidValuesShouldDefaultTo12)
   Assert::AreEqual(t.GetAverage(), 12);
 }
 
-TEST_CASE("Tempearture", Temperature_AmplitudeIsCorrect)
+TEST_CASE("Temperature", Temperature_AmplitudeIsCorrect)
 {
   Temperature t(7, 10, 28);
   Assert::AreEqual(t.GetAmplitude(), 21);
@@ -56,20 +56,20 @@ TEST_CASE("Forecast", Forecast_DefaultValues)
 {
   Forecast f;
 
-  Assert::AreEqual(is.GetPlace(), "");
-  Assert::AreEqual(is.GetTemperature().GetMin(), 0);
-  Assert::AreEqual(is.GetTemperature().GetAverage(), 0);
-  Assert::AreEqual(is.GetTemperature().GetMax(), 0);
+  Assert::AreEqual(f.GetPlace(), "");
+  Assert::AreEqual(f.GetTemperature().GetMin(), 0);
+  Assert::AreEqual(f.GetTemperature().GetAverage(), 0);
+  Assert::AreEqual(f.GetTemperature().GetMax(), 0);
 }
 
 TEST_CASE("Forecast", Forecast_ClassKeepsAssignedData)
 {
   Forecast f("Sofia", Temperature(7, 20, 28));
 
-  Assert::AreEqual(is.GetPlace(), "Sofia");
-  Assert::AreEqual(is.GetTemperature().GetMin(), 7);
-  Assert::AreEqual(is.GetTemperature().GetAverage(), 20);
-  Assert::AreEqual(is.GetTemperature().GetMax(), 28);
+  Assert::AreEqual(f.GetPlace(), "Sofia");
+  Assert::AreEqual(f.GetTemperature().GetMin(), 7);
+  Assert::AreEqual(f.GetTemperature().GetAverage(), 20);
+  Assert::AreEqual(f.GetTemperature().GetMax(), 28);
 }
 
 TEST_CASE("Forecast", Forecast_RegularConstructorCopiesPlace)
@@ -155,8 +155,8 @@ TEST_CASE("Forecast", Forecast_UpdateIfHotterWorks)
   Forecast f("Sofia", t3);
 
   f.UpdateIfHotter(t2);
-  Assert::IsEqual(f.GetTemperature(), t3);
+  Assert::AreEqual(f.GetTemperature(), t3);
 
   f.UpdateIfHotter(t1);
-  Assert::IsEqual(f.GetTemperature(), t1);
+  Assert::AreEqual(f.GetTemperature(), t1);
 }
