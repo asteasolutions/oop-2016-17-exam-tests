@@ -154,9 +154,12 @@ TEST_CASE("Forecast", Forecast_UpdateIfHotterWorks)
   
   Forecast f("Sofia", t3);
 
-  f.UpdateIfHotter(t2);
+  f.UpdateIfHotter(Forecast("Varna", t1));
+  Assert::AreEqual(f.GetTemperature(), t3);
+  
+  f.UpdateIfHotter(Forecast("Sofia", t2));
   Assert::AreEqual(f.GetTemperature(), t3);
 
-  f.UpdateIfHotter(t1);
+  f.UpdateIfHotter(Forecast("Sofia", t1));
   Assert::AreEqual(f.GetTemperature(), t1);
 }
