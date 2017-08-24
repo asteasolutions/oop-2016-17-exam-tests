@@ -17,7 +17,7 @@ class PowerSpec
 ///
 /// Клас, представящ трансформатор
 ///
-class Transfomer
+class Transformer
 {
   // моля, попълнете реализацията на клас тук
 };
