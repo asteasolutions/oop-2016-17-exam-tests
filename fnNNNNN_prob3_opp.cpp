@@ -143,10 +143,10 @@ public:
     return m_Temperature;
   }
 
-  void UpdateIfHotter(Temperature const& t)
+  void UpdateIfHotter(Forecast const& f)
   {
-    if (t > GetTemperature())
-      m_Temperature = t;
+    if (!strcmp(GetPlace(), f.GetPlace()) && f.GetTemperature() > GetTemperature())
+      m_Temperature = f.GetTemperature();
   }
 };
 
