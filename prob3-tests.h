@@ -145,3 +145,18 @@ TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesTemperature)
 	
   Assert::AreEqual(f1.GetTemperature(), f2.GetTemperature());
 }
+
+TEST_CASE("Forecast", Forecast_UpdateIfHotterWorks)
+{
+  Temperature t1(7, 10, 28);
+  Temperature t2(5, 12, 20);
+  Temperature t3(8, 18, 20);
+  
+  Forecast f("Sofia", t3);
+
+  f.UpdateIfHotter(t2);
+  Assert::IsEqual(f.GetTemperature(), t3);
+
+  f.UpdateIfHotter(t1);
+  Assert::IsEqual(f.GetTemperature(), t1);
+}
