@@ -79,7 +79,7 @@ TEST_CASE("Forecast", Forecast_RegularConstructorCopiesPlace)
 
   const Forecast f(Place, Temperature(7, 20, 28));
   Place[2] = 'n';
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(f.GetPlace()),
                       reinterpret_cast<intptr_t>(Place)
@@ -93,7 +93,7 @@ TEST_CASE("Forecast", Forecast_CopyConstructorCopiesPlace)
 
   Forecast const * f1 = new Forecast(Place, Temperature(7, 20, 28));
   const Forecast f2 = *f1;
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(f1->GetPlace()),
                       reinterpret_cast<intptr_t>(f2.GetPlace())
@@ -110,7 +110,7 @@ TEST_CASE("Forecast", Forecast_CopyConstructorCopiesTemperature)
 
   const Forecast f1(Place, Temperature(7, 20, 28));
   const Forecast f2 = f1;
-	
+
   Assert::AreEqual(f1.GetTemperature(), f2.GetTemperature());
 }
 
@@ -122,7 +122,7 @@ TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesPlace)
   Forecast const * f1 = new Forecast(Place, Temperature(23, 8, 2017));
   Forecast f2;
   f2 = *f1;
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(f1->GetPlace()),
                       reinterpret_cast<intptr_t>(f2.GetPlace())
@@ -141,7 +141,7 @@ TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesTemperature)
   const Forecast f1(Place, Temperature(7, 20, 28));
   Forecast f2;
   f2 = f1;
-	
+
   Assert::AreEqual(f1.GetTemperature(), f2.GetTemperature());
 }
 
@@ -150,12 +150,12 @@ TEST_CASE("Forecast", Forecast_UpdateIfHotterWorks)
   const Temperature t1(7, 10, 28);
   const Temperature t2(5, 12, 20);
   const Temperature t3(8, 18, 20);
-  
+
   Forecast f("Sofia", t3);
 
   f.UpdateIfHotter(Forecast("Varna", t1));
   Assert::AreEqual(f.GetTemperature(), t3);
-  
+
   f.UpdateIfHotter(Forecast("Sofia", t2));
   Assert::AreEqual(f.GetTemperature(), t3);
 

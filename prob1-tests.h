@@ -37,7 +37,7 @@ TEST_CASE("Date", Date_ComparisonsWork)
   Assert::AreComparisonOperatorsStrict(d2);
   Assert::AreComparisonOperatorsStrict(d3);
   Assert::AreComparisonOperatorsStrict(d4);
-    
+
   Assert::AreComparisonOperatorsStrictForDifferingElements(d1, d2);
   Assert::AreComparisonOperatorsStrictForDifferingElements(d1, d3);
   Assert::AreComparisonOperatorsStrictForDifferingElements(d1, d4);
@@ -50,7 +50,7 @@ TEST_CASE("Date", Date_ComparisonsWork)
 TEST_CASE("Student", Student_ClassKeepsAssignedData)
 {
   const Student s("John Smith", Date(23,8,2017));
-	
+
   Assert::AreEqual(s.GetName(), "John Smith");
   Assert::AreEqual(s.GetBirthDate(), Date(23,8,2017));
 }
@@ -69,7 +69,7 @@ TEST_CASE("Student", Student_RegularConstructorCopiesName)
 
   const Student s(Name, Date(23, 8, 2017));
   Name[0] = 'S';
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(s.GetName()),
                       reinterpret_cast<intptr_t>(Name)
@@ -83,7 +83,7 @@ TEST_CASE("Student", Student_CopyConstructorCopiesName)
 
   Student const* s1 = new Student(Name, Date(23, 8, 2017));
   const Student s2 = *s1;
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(s1->GetName()),
                       reinterpret_cast<intptr_t>(s2.GetName())
@@ -101,7 +101,7 @@ TEST_CASE("Student", Student_CopyConstructorCopiesDate)
 
   const Student s1(Name, Date(23, 8, 2017));
   const Student s2 = s1;
-	
+
   Assert::AreEqual(s1.GetBirthDate(), s2.GetBirthDate());
 }
 
@@ -113,7 +113,7 @@ TEST_CASE("Student", Student_AssignmentOperatorCopiesName)
   Student const* s1 = new Student(Name, Date(23, 8, 2017));
   Student s2;
   s2 = *s1;
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(s1->GetName()),
                       reinterpret_cast<intptr_t>(s2.GetName())
@@ -132,6 +132,6 @@ TEST_CASE("Student", Student_AssignmentOperatorCopiesDate)
   const Student s1(Name, Date(23, 8, 2017));
   Student s2;
   s2 = s1;
-	
+
   Assert::AreEqual(s1.GetBirthDate(), s2.GetBirthDate());
 }

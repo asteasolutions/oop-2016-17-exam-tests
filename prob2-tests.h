@@ -69,7 +69,7 @@ TEST_CASE("Interval", Interval_ComparisonsWork)
 TEST_CASE("IntervalSet", IntervalSet_DefaultSingleton)
 {
   const IntervalSet is;
-  
+
   Assert::AreEqual(is.GetSize(), 1);
   Assert::AreEqual(is.GetIntervals()[0].GetLeft(), 0);
   Assert::AreEqual(is.GetIntervals()[0].GetRight(), 1);
@@ -79,9 +79,9 @@ TEST_CASE("IntervalSet", IntervalSet_ClassKeepsAssignedData)
 {
   Interval Intervals[] = { Interval(1, 3), Interval(2, 4), Interval(3, 5) };
   const IntervalSet is(Intervals, 3);
-  
+
   Assert::AreEqual(is.GetSize(), 3);
-  
+
   Assert::AreEqual(is.GetIntervals()[0].GetLeft(), 1);
   Assert::AreEqual(is.GetIntervals()[0].GetRight(), 3);
 
@@ -96,9 +96,9 @@ TEST_CASE("IntervalSet", IntervalSet_RegularConstrucorCopiesArray)
 {
   // cannot really guarantee, but still better than nothing
   Interval Intervals[] = { Interval(1, 3), Interval(2, 4), Interval(3, 5) };
-  
+
   const IntervalSet is(Intervals, 3);
-  
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(is.GetIntervals()),
                       reinterpret_cast<intptr_t>(Intervals)
@@ -114,10 +114,10 @@ TEST_CASE("IntervalSet", IntervalSet_CopyConstrucorCopiesArray)
 {
   // cannot really guarantee, but still better than nothing
   Interval Intervals[] = { Interval(1, 3), Interval(2, 4), Interval(3, 5) };
-  
+
   IntervalSet const * is1 = new IntervalSet(Intervals, 3);
   const IntervalSet is2 = *is1;
-  
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(is1->GetIntervals()),
                       reinterpret_cast<intptr_t>(is2.GetIntervals())
@@ -139,11 +139,11 @@ TEST_CASE("IntervalSet", IntervalSet_AssignmentOperatorCopiesArray)
 {
   // cannot really guarantee, but still better than nothing
   Interval Intervals[] = { Interval(1, 3), Interval(2, 4), Interval(3, 5) };
-  
+
   IntervalSet const * is1 = new IntervalSet(Intervals, 3);
   IntervalSet is2;
   is2 = *is1;
-  
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(is1->GetIntervals()),
                       reinterpret_cast<intptr_t>(is2.GetIntervals())
