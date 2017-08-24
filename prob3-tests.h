@@ -79,7 +79,7 @@ TEST_CASE("Forecast", Forecast_RegularConstructorCopiesPlace)
 
   Forecast f(Place, Temperature(7, 20, 28));
   Place[2] = 'n';
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(f.GetPlace()),
                       reinterpret_cast<intptr_t>(Place)
@@ -93,7 +93,7 @@ TEST_CASE("Forecast", Forecast_CopyConstructorCopiesPlace)
 
   Forecast* f1 = new Forecast(Place, Temperature(7, 20, 28));
   Forecast f2 = *f1;
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(f1->GetPlace()),
                       reinterpret_cast<intptr_t>(f2.GetPlace())
@@ -111,7 +111,7 @@ TEST_CASE("Forecast", Forecast_CopyConstructorCopiesTemperature)
 
   Forecast f1(Place, Temperature(7, 20, 28));
   Forecast f2 = f1;
-	
+
   Assert::AreEqual(f1.GetTemperature(), f2.GetTemperature());
 }
 
@@ -123,7 +123,7 @@ TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesPlace)
   Forecast* f1 = new Forecast(Place, Temperature(23, 8, 2017));
   Forecast f2;
   f2 = *f1;
-	
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(f1->GetPlace()),
                       reinterpret_cast<intptr_t>(f2.GetPlace())
@@ -142,7 +142,7 @@ TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesTemperature)
   Forecast f1(Place, Temperature(7, 20, 28));
   Forecast f2;
   f2 = f1;
-	
+
   Assert::AreEqual(f1.GetTemperature(), f2.GetTemperature());
 }
 
@@ -151,12 +151,18 @@ TEST_CASE("Forecast", Forecast_UpdateIfHotterWorks)
   Temperature t1(7, 10, 28);
   Temperature t2(5, 12, 20);
   Temperature t3(8, 18, 20);
-  
-  Forecast f("Sofia", t3);
 
-  f.UpdateIfHotter(t2);
-  Assert::AreEqual(f.GetTemperature(), t3);
+  Forecast f1("Sofia", t3);
+  Forecast f2("Varna", t2);
+  Forecast f3("Sofia", t1);
+  Forecast f4("Sofia", t3);
 
-  f.UpdateIfHotter(t1);
-  Assert::AreEqual(f.GetTemperature(), t1);
+  f1.UpdateIfHotter(f2);
+  Assert::AreEqual(f1.GetTemperature(), t3);
+
+  f1.UpdateIfHotter(f3);
+  Assert::AreEqual(f1.GetTemperature(), t1);
+
+  f3.UpdateIfHotter(f4);
+  Assert::AreEqual(f3.GetTemperature(), t1);
 }
