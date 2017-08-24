@@ -5,9 +5,9 @@
 TEST_CASE("Time", Time_ClassKeepsAssignedData)
 {
   const Time t(23, 56, 15);
-  Assert::AreEqual(t.GetSecond(), 23);
+  Assert::AreEqual(t.GetSecond(), 15);
   Assert::AreEqual(t.GetMinute(), 56);
-  Assert::AreEqual(t.GetHour(), 15);
+  Assert::AreEqual(t.GetHour(), 23);
 }
 
 TEST_CASE("Time", Time_DefaultTimeIsZero)
@@ -156,12 +156,14 @@ TEST_CASE("Appointment", Appointment_AssignmentOperatorCopiesTime)
 
 TEST_CASE("Appointment", Appointment_GetLengthWorks)
 {
+  char Description[] = "OOP Exam";
+
   const Appointment a1(Description, Time(9, 15, 10), Time(10, 55, 20));
-  Assert::1AreEqual(a1.GetLength(), Time(1, 40, 10));
+  Assert::AreEqual(a1.GetLength(), Time(1, 40, 10));
 
   const Appointment a2(Description, Time(9, 15, 10), Time(12, 10, 20));
-  Assert::1AreEqual(a2.GetLength(), Time(2, 55, 10));
+  Assert::AreEqual(a2.GetLength(), Time(2, 55, 10));
 
-  const Appointment a3(Description, Time(9, 15, 10), Time(14, 5, 5));
-  Assert::1AreEqual(a2.GetLength(), Time(4, 49, 55));
+  const Appointment a3(Description, Time(9, 15, 10), Time(14, 15, 5));
+  Assert::AreEqual(a3.GetLength(), Time(4, 59, 55));
 }
