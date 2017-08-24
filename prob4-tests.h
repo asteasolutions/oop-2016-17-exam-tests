@@ -13,9 +13,9 @@ TEST_CASE("PowerSpec", PowerSpec_DefalultSpecs)
 TEST_CASE("PowerSpec", PowerSpec_ClassKeepsAssignedData)
 {
   PowerSpec ps("DC", 12, 2);
-  Assert::AreEqual(t.GetACDC(), "DC");
-  Assert::AreEqual(t.GetVoltage(), 12);
-  Assert::AreEqual(t.GetAmps(), 2);
+  Assert::AreEqual(ps.GetACDC(), "DC");
+  Assert::AreEqual(ps.GetVoltage(), 12);
+  Assert::AreEqual(ps.GetAmps(), 2);
 }
 
 TEST_CASE("PowerSpec", PowerSpec_InvalidValuesShouldDefault)
@@ -26,13 +26,13 @@ TEST_CASE("PowerSpec", PowerSpec_InvalidValuesShouldDefault)
   Assert::AreEqual(ps1.GetVoltage(), 230);
   Assert::AreEqual(ps1.GetAmps(), 1);
 
-  PowerSpec ps1("AC", -12, 5);
+  PowerSpec ps2("AC", -12, 5);
 
   Assert::AreEqual(ps2.GetACDC(), "AC");
   Assert::AreEqual(ps2.GetVoltage(), 230);
   Assert::AreEqual(ps2.GetAmps(), 1);
 
-  PowerSpec ps1("DC", 12, -5);
+  PowerSpec ps3("DC", 12, -5);
 
   Assert::AreEqual(ps3.GetACDC(), "AC");
   Assert::AreEqual(ps3.GetVoltage(), 230);
@@ -47,10 +47,10 @@ TEST_CASE("PowerSpec", PowerSpec_PowerIsCorrect)
 
 TEST_CASE("PowerSpec", PowerSpec_ComparisonsWork)
 {
-  Interval ps1("AC", 230, 5);
-  Interval ps2("AC", 110, 3);
-  Interval ps3("DC", 12, 2);
-  Interval ps4("DC", 12, 1);
+  PowerSpec ps1("AC", 230, 5);
+  PowerSpec ps2("AC", 110, 3);
+  PowerSpec ps3("DC", 12, 2);
+  PowerSpec ps4("DC", 12, 1);
 
   Assert::AreComparisonOperatorsStrict(ps1);
   Assert::AreComparisonOperatorsStrict(ps2);
@@ -97,9 +97,9 @@ TEST_CASE("Transformer", Transformer_ClassKeepsAssignedData)
   PowerSpec ps2("DC", 12, 1);
   Transformer t("MuchPower", ps1, ps2);
 
-  Assert::AreEqual(f.GetBrand(), "MuchPower");
-  Assert::AreEqual(f.GetInSpec(), ps1);
-  Assert::AreEqual(f.GetOutSpec(), ps2);
+  Assert::AreEqual(t.GetBrand(), "MuchPower");
+  Assert::AreEqual(t.GetInSpec(), ps1);
+  Assert::AreEqual(t.GetOutSpec(), ps2);
 }
 
 TEST_CASE("Transformer", Transformer_InvalidOutSpecEqualsInSpec)
@@ -108,9 +108,9 @@ TEST_CASE("Transformer", Transformer_InvalidOutSpecEqualsInSpec)
   PowerSpec ps2("DC", 12, 1);
   Transformer t("MuchPower", ps2, ps1);
 
-  Assert::AreEqual(f.GetBrand(), "MuchPower");
-  Assert::AreEqual(f.GetInSpec(), ps1);
-  Assert::AreEqual(f.GetOutSpec(), ps1);
+  Assert::AreEqual(t.GetBrand(), "MuchPower");
+  Assert::AreEqual(t.GetInSpec(), ps2);
+  Assert::AreEqual(t.GetOutSpec(), ps2);
 }
 
 TEST_CASE("Transformer", Transformer_RegularConstructorCopiesBrand)
@@ -133,7 +133,7 @@ TEST_CASE("Transformer", Transformer_CopyConstructorCopiesBrand)
   char Brand[] = "MuchPower";
 
   Transformer* t1 = new Transformer(Brand, PowerSpec("AC", 230, 5), PowerSpec("DC", 12, 1));
-  Transformer t2 = *f1;
+  Transformer t2 = *t1;
 
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(t1->GetBrand()),
@@ -192,7 +192,7 @@ TEST_CASE("Transformer", Transformer_ComposeWorks)
   PowerSpec ps1("AC", 230, 5);
   PowerSpec ps2("AC", 110, 10);
   PowerSpec ps3("DC", 12, 1);
-  
+
   Transformer t1("MuchPower", ps1, ps2);
   Transformer t2("SoElectrical", ps2, ps3);
 
@@ -202,5 +202,7 @@ TEST_CASE("Transformer", Transformer_ComposeWorks)
   Assert::AreEqual(t3.GetOutSpec(), ps3);
 
   Transformer t4 = t2 * t1;
-  Assert::AreEqual(t1, t4);
+  Assert::AreEqual(t2.GetBrand(), t4.GetBrand());
+  Assert::AreEqual(t2.GetInSpec(), t4.GetInSpec());
+  Assert::AreEqual(t2.GetOutSpec(), t4.GetOutSpec());
 }
