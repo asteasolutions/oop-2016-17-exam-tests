@@ -112,7 +112,7 @@ public:
 
   ~Forecast()
   {
-    delete m_pPlace;
+    delete[] m_pPlace;
   }
 
   Forecast & operator=(const Forecast & other)
@@ -138,7 +138,7 @@ public:
     return m_pPlace;
   }
 	
-  const Temperature GetTemperature() const
+  const Temperature& GetTemperature() const
   {
     return m_Temperature;
   }

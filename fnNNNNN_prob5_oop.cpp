@@ -116,7 +116,7 @@ public:
 
   ~Appointment()
   {
-    delete m_pDescription;
+    delete[] m_pDescription;
   }
 
   Appointment & operator=(const Appointment & other)
