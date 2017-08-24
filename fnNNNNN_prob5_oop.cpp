@@ -18,7 +18,7 @@ private:
   int m_Hour, m_Minute, m_Second;
 
 public:
-  
+
   Time(int Hour = 0, int Minute = 0, int Second = 0) :
     m_Hour(Hour), m_Minute(Minute), m_Second(Second)
   {
@@ -76,7 +76,7 @@ public:
   {
     return other <= *this;
   }
-  
+
 };
 
 ///
@@ -179,6 +179,6 @@ public:
 int main() {
 
   RunTests();
-  
+
   return 0;
 }

@@ -15,7 +15,7 @@ private:
   int m_Hour, m_Minute, m_Second;
 
 public:
-  
+
   Chronometer(int Hour = 0, int Minute = 0, int Second = 0) :
     m_Hour(Hour), m_Minute(Minute), m_Second(Second)
   {
@@ -144,7 +144,7 @@ public:
   {
     if (GetSize() == 0)
       return Chronometer();
-    
+
     int bestIndex = 0;
     for(int j = 1 ; j < GetSize(); j++)
       if (GetChronometers()[j] < GetChronometers()[bestIndex])
@@ -160,6 +160,6 @@ public:
 
 int main() {
   RunTests();
-  
+
   return 0;
 }

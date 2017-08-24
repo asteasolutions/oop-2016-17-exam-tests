@@ -51,22 +51,22 @@ public:
   {
     return !(*this == other);
   }
-  
+
   bool operator<= (const Interval& other) const
   {
     return other.GetLeft() <= GetLeft() && GetRight() <= other.GetRight();
   }
-  
+
   bool operator> (const Interval& other) const
   {
     return other < *this;
   }
-  
+
   bool operator< (const Interval& other) const
   {
     return *this <= other && *this != other;
   }
-  
+
   bool operator>= (const Interval& other) const
   {
     return other <= *this;
@@ -159,6 +159,6 @@ public:
 int main() {
 
   RunTests();
-  
+
   return 0;
 }

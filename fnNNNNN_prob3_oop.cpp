@@ -137,7 +137,7 @@ public:
   {
     return m_pPlace;
   }
-	
+
   const Temperature& GetTemperature() const
   {
     return m_Temperature;
@@ -157,6 +157,6 @@ public:
 int main() {
 
   RunTests();
-  
+
   return 0;
 }
