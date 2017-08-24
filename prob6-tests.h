@@ -60,7 +60,7 @@ TEST_CASE("Chronometer", Chronometer_AdditionWorks)
   Chronometer t1(10, 20, 45);
 
   t1 += 90;
-  
+
   Assert::AreEqual(t1.GetHour(), 10);
   Assert::AreEqual(t1.GetMinute(), 22);
   Assert::AreEqual(t1.GetSecond(), 15);
@@ -101,7 +101,7 @@ TEST_CASE("Chronometer", Chronometer_LessThanWorks)
 TEST_CASE("Athlete", Athlete_DefaultSingletonIsEmpty)
 {
   const Athlete at;
-  
+
   Assert::AreEqual(at.GetSize(), 0);
 }
 
@@ -110,9 +110,9 @@ TEST_CASE("Athlete", Athlete_ClassKeepsAssignedData)
   Chronometer Chronometers[] =
     { Chronometer(1, 15, 2), Chronometer(0, 45, 18), Chronometer(0, 50, 33) };
   const Athlete at(Chronometers, 3);
-  
+
   Assert::AreEqual(at.GetSize(), 3);
-  
+
   Assert::AreEqual(at.GetChronometers()[0].GetHour(), 1);
   Assert::AreEqual(at.GetChronometers()[0].GetMinute(), 15);
   Assert::AreEqual(at.GetChronometers()[0].GetSecond(), 2);
@@ -131,9 +131,9 @@ TEST_CASE("Athlete", Athlete_RegularConstrucorCopiesArray)
   // cannot really guarantee, but still better than nothing
   Chronometer Chronometers[] =
     { Chronometer(1, 15, 2), Chronometer(0, 45, 18), Chronometer(0, 50, 33) };
-  
+
   const Athlete at(Chronometers, 3);
-  
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(at.GetChronometers()),
                       reinterpret_cast<intptr_t>(Chronometers)
@@ -152,10 +152,10 @@ TEST_CASE("Athlete", Athlete_CopyConstrucorCopiesArray)
   // cannot really guarantee, but still better than nothing
   Chronometer Chronometers[] =
     { Chronometer(1, 15, 2), Chronometer(0, 45, 18), Chronometer(0, 50, 33) };
-  
+
   Athlete const * at1 = new Athlete(Chronometers, 3);
   const Athlete at2 = *at1;
-  
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(at1->GetChronometers()),
                       reinterpret_cast<intptr_t>(at2.GetChronometers())
@@ -181,11 +181,11 @@ TEST_CASE("Athlete", Athlete_AssignmentOperatorCopiesArray)
   // cannot really guarantee, but still better than nothing
   Chronometer Chronometers[] =
     { Chronometer(1, 15, 2), Chronometer(0, 45, 18), Chronometer(0, 50, 33) };
-  
+
   Athlete const * at1 = new Athlete(Chronometers, 3);
   Athlete at2;
   at2 = *at1;
-  
+
   Assert::AreNotEqual(
                       reinterpret_cast<intptr_t>(at1->GetChronometers()),
                       reinterpret_cast<intptr_t>(at2.GetChronometers())
@@ -220,8 +220,8 @@ TEST_CASE("Athlete", Athlete_GetBestTimeWorks)
 
   const Athlete at2;
   const Chronometer t2 = at2.GetBestTime();
-  
+
   Assert::AreEqual(t2.GetHour(), 0);
   Assert::AreEqual(t2.GetMinute(), 0);
-  Assert::AreEqual(t2.GetSecond(), 0);  
+  Assert::AreEqual(t2.GetSecond(), 0);
 }
