@@ -136,7 +136,7 @@ public:
 
 	~Student()
 	{
-		delete m_pName;
+		delete[] m_pName;
 	}
 
 	Student & operator=(const Student & other)

@@ -32,11 +32,11 @@ public:
       m_Voltage = -1;
 
     if (m_Voltage < 0 || m_Amps < 0)
-      {
-        m_IsAC = true;
-        m_Voltage = 230;
-        m_Amps = 1;
-      }
+    {
+      m_IsAC = true;
+      m_Voltage = 230;
+      m_Amps = 1;
+    }
   }
 
   char const* GetACDC() const
@@ -134,7 +134,7 @@ public:
 
   ~Transformer()
   {
-    delete m_pBrand;
+    delete[] m_pBrand;
   }
 
   Transformer & operator=(const Transformer & other)
