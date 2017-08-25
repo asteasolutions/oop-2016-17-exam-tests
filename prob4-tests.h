@@ -142,7 +142,10 @@ TEST_CASE("Transformer", Transformer_CopyConstructorCopiesBrand)
 
   delete t1;
 
-  Assert::AreEqual(Brand, t2.GetBrand());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Brand),
+		   reinterpret_cast<const char*>(t2.GetBrand())
+		   );
 }
 
 TEST_CASE("Transformer", Transformer_CopyConstructorCopiesPowerSpecs)
@@ -172,7 +175,10 @@ TEST_CASE("Transformer", Transformer_AssignmentOperatorCopiesBrand)
 
   delete t1;
 
-  Assert::AreEqual(Brand, t2.GetBrand());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Brand),
+		   reinterpret_cast<const char*>(t2.GetBrand())
+		   );
 }
 
 TEST_CASE("Transformer", Transformer_AssignmentOperatorCopiesPowerSpecs)

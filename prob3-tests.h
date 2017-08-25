@@ -101,7 +101,10 @@ TEST_CASE("Forecast", Forecast_CopyConstructorCopiesPlace)
 
   delete f1;
 
-  Assert::AreEqual(Place, f2.GetPlace());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Place),
+		   reinterpret_cast<const char*>(f2.GetPlace())
+		   );
 }
 
 TEST_CASE("Forecast", Forecast_CopyConstructorCopiesTemperature)
@@ -130,7 +133,10 @@ TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesPlace)
 
   delete f1;
 
-  Assert::AreEqual(Place, f2.GetPlace());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Place),
+		   reinterpret_cast<const char*>(f2.GetPlace())
+		   );
 }
 
 TEST_CASE("Forecast", Forecast_AssignmentOperatorCopiesTemperature)
