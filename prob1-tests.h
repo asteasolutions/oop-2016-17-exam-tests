@@ -91,7 +91,10 @@ TEST_CASE("Student", Student_CopyConstructorCopiesName)
 
   delete s1;
 
-  Assert::AreEqual(Name, s2.GetName());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Name),
+		   reinterpret_cast<const char*>(s2.GetName())
+		   );
 }
 
 TEST_CASE("Student", Student_CopyConstructorCopiesDate)
@@ -121,7 +124,10 @@ TEST_CASE("Student", Student_AssignmentOperatorCopiesName)
 
   delete s1;
 
-  Assert::AreEqual(Name, s2.GetName());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Name),
+		   reinterpret_cast<const char*>(s2.GetName())
+		   );
 }
 
 TEST_CASE("Student", Student_AssignmentOperatorCopiesDate)
