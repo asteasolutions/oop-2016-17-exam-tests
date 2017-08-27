@@ -86,7 +86,7 @@ TEST_CASE("Transformer", Transformer_DefaultValues)
   const Transformer t;
   const PowerSpec zero("DC", 0, 0);
 
-  Assert::AreEqual(t.GetBrand(), "");
+  Assert::IsTrue(!strcmp(t.GetBrand(), "") || !strcmp(t.GetBrand(), "Unknown"));
   Assert::AreEqual(t.GetInSpec(), zero);
   Assert::AreEqual(t.GetOutSpec(), zero);
 }
@@ -142,7 +142,10 @@ TEST_CASE("Transformer", Transformer_CopyConstructorCopiesBrand)
 
   delete t1;
 
-  Assert::AreEqual(Brand, t2.GetBrand());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Brand),
+		   reinterpret_cast<const char*>(t2.GetBrand())
+		   );
 }
 
 TEST_CASE("Transformer", Transformer_CopyConstructorCopiesPowerSpecs)
@@ -172,7 +175,10 @@ TEST_CASE("Transformer", Transformer_AssignmentOperatorCopiesBrand)
 
   delete t1;
 
-  Assert::AreEqual(Brand, t2.GetBrand());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Brand),
+		   reinterpret_cast<const char*>(t2.GetBrand())
+		   );
 }
 
 TEST_CASE("Transformer", Transformer_AssignmentOperatorCopiesPowerSpecs)
