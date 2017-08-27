@@ -107,7 +107,10 @@ TEST_CASE("Appointment", Appointment_CopyConstructorCopiesDescription)
 
   delete a1;
 
-  Assert::AreEqual(Description, a2.GetDescription());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Description),
+		   reinterpret_cast<const char*>(a2.GetDescription())
+		   );
 }
 
 TEST_CASE("Appointment", Appointment_CopyConstructorCopiesTimes)
@@ -138,7 +141,10 @@ TEST_CASE("Appointment", Appointment_AssignmentOperatorCopiesDescription)
 
   delete a1;
 
-  Assert::AreEqual(Description, a2.GetDescription());
+  Assert::AreEqual(
+		   reinterpret_cast<const char*>(Description),
+		   reinterpret_cast<const char*>(a2.GetDescription())
+		   );
 }
 
 TEST_CASE("Appointment", Appointment_AssignmentOperatorCopiesTime)
